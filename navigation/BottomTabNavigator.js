@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image } from "react-native";
+import { Image, SafeAreaView } from "react-native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RankScreen from "../screens/RankScreen";
@@ -18,9 +18,9 @@ export default function BottomTabNavigator() {
         inactiveTintColor: "#333336",
         inactiveBackgroundColor: "#333336",
         showLabel: false,
-        style: {height: 90 }
+        style: {height: 90, marginBottom: -34}
       }}
-      
+      tabBarComponent={()=> null}
     >
       <BottomTab.Screen
         name="Rank"
@@ -31,10 +31,11 @@ export default function BottomTabNavigator() {
               source={require("../assets/images/rank-bar-button.png")}
               style={{
                 width: 57,
-                height: 49,
+                height: 55,
                 backgroundColor: color,
-                marginTop: 10,
-                marginBottom: 5
+                marginTop: 5,
+                marginBottom: 10,
+                resizeMode: 'contain'
               }}
             />
           )
@@ -48,11 +49,12 @@ export default function BottomTabNavigator() {
             <Image
               source={require("../assets/images/live-bar-button.png")}
               style={{
-                width: 47,
-                height: 49,
+                width: 57,
+                height: 55,
                 backgroundColor: color,
-                marginTop: 10,
-                marginBottom: 5
+                marginTop: 5,
+                marginBottom: 10,
+                resizeMode: 'contain'
               }}
             />
           )
