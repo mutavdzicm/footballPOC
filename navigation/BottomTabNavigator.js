@@ -18,7 +18,7 @@ export default function BottomTabNavigator() {
         inactiveTintColor: "#333336",
         inactiveBackgroundColor: "#333336",
         showLabel: false,
-        style: {height: 75 }
+        style: {height: 90 }
       }}
       
     >

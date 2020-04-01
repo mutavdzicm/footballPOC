@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import DetailsScreen from "./screens/DetailsScreen";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
 
@@ -29,7 +30,7 @@ export default function App(props) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+          helvetica: require("./assets/fonts/HelveticaNeue.ttf")
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -59,6 +60,7 @@ export default function App(props) {
             }}
           >
             <Stack.Screen name="Root" component={BottomTabNavigator} />
+            <Stack.Screen name="Details" component={DetailsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
