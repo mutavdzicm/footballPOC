@@ -56,25 +56,19 @@ export default function App(props) {
     return (
       <View style={styles.container}>
         {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <NavigationContainer
-            ref={containerRef}
-            initialState={initialNavigationState}
+        <NavigationContainer
+          ref={containerRef}
+          initialState={initialNavigationState}
+        >
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
           >
-<<<<<<< HEAD
             <Stack.Screen name="Root" component={BottomTabNavigator} />
             <Stack.Screen name="Details" component={DetailsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
-=======
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false
-              }}
-            >
-              <Stack.Screen name="Root" component={BottomTabNavigator} />
-            </Stack.Navigator>
-          </NavigationContainer>
->>>>>>> 0fca1854f3730a26e6a72c99d822aebaec20bda4
       </View>
     );
   }
@@ -83,6 +77,6 @@ export default function App(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   }
 });
