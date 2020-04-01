@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   Image,
   TouchableOpacity,
@@ -15,20 +14,16 @@ import API from "../API";
 export default function RankScreen({ navigation }) {
   const [rankData, setRankData] = useState({});
 
-  async function fetchRankings() {
-    const res = await API.get("/v2/competitions/2021/standings ");
-    setRankData(res.data);
-  }
+  const fetchRankings = async () => await API.get("/v2/competitions/2021/standings/");
 
   useEffect(() => {
-    fetchRankings();
+    fetchRankings()
+        .then(success => setRankData(success.data))
+        .catch(error => console.log(error))
   }, []);
+
   return (
     <View style={styles.container}>
-      <SafeAreaView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-      >
         <Image
           source={require("../assets/images/heroImage.png")}
           style={styles.image}
@@ -105,7 +100,6 @@ export default function RankScreen({ navigation }) {
           }}
           keyExtractor={item => item.team.id.toString()}
         />
-      </SafeAreaView>
     </View>
   );
 }
@@ -123,9 +117,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   image: {
-    width: "100%",
-    height: 200,
-    marginBottom: 20
+    width: "100%"
   },
   row: {
     display: "flex",

@@ -5,7 +5,7 @@ let API = axios.create({
   baseURL: "https://api.football-data.org/",
   timeout: 10000
 });
-API.defaults.headers.common["X-Auth-Token"] =
+API.defaults.headers["X-Auth-Token"] =
   "e72d71ca22bd4ab6842ea4bad1effbd0";
 
 export default API;

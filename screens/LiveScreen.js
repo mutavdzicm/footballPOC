@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     banner: {
-        width: '100%'
+        width: '100%',
     },
     header: {
         textAlign: 'center',

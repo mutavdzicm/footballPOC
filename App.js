@@ -3,8 +3,7 @@ import {
   Platform,
   StatusBar,
   StyleSheet,
-  View,
-  SafeAreaView
+  View
 } from "react-native";
 import { SplashScreen } from "expo";
 import * as Font from "expo-font";
