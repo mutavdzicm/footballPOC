@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, AppState, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, AppState, Platform, RefreshControl } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LiveMatch from "../components/LiveMatch";
 
@@ -8,6 +8,7 @@ const LiveScreen = () => {
 
     const [livescore, setLivescore] = useState({matches: []});
     const [appState, setAppState] = useState(AppState.currentState);
+    const [refreshing, setRefreshing] = React.useState(false);
 
     useEffect(() => {
         handleWebSocket();
@@ -40,9 +41,19 @@ const LiveScreen = () => {
 
     const renderLiveScores = () => livescore.matches.map(match => <LiveMatch key={ match.title } match={ match } />);
 
+    const handleRefresh = async () => {
+        setRefreshing(true);
+        await handleWebSocket();
+        setRefreshing(false);
+    };
+
     return (
       <View style={styles.container}>
-          <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <ScrollView
+              style={styles.container}
+              contentContainerStyle={styles.contentContainer}
+              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh}/>}
+          >
               <Image
                   style={styles.banner}
                   source={require('../assets/images/heroImage.png')}
