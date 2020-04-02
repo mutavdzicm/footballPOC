@@ -14,12 +14,12 @@ export default function BottomTabNavigator() {
       initialRouteName="Rank"
       labeled={false}
       tabBarOptions={{
-        activeTintColor: "#2088f0",
-        activeBackgroundColor: "#2088f0",
+        activeTintColor: "#313B49",
+        activeBackgroundColor: "#313B49",
         inactiveTintColor: "#333336",
         inactiveBackgroundColor: "#333336",
         showLabel: false,
-        style: isIOS() && {height: 130, marginBottom: -34} || {height: 90}
+        style: isIOS() && {height: 110, marginBottom: -34} || {height: 75}
       }}
       tabBarComponent={()=> null}
     >
@@ -33,8 +33,8 @@ export default function BottomTabNavigator() {
               style={
                   isIOS() &&
                   {
-                      width: 57,
-                      height: 55,
+                      width: 31,
+                      height: 33,
                       backgroundColor: color,
                       marginTop: 5,
                       marginBottom: 10,
@@ -42,8 +42,8 @@ export default function BottomTabNavigator() {
                   }
                   ||
                   {
-                      width: 57,
-                      height: 55,
+                      width: 31,
+                      height: 33,
                       backgroundColor: color,
                       marginTop: 5,
                       resizeMode: 'contain'
@@ -63,8 +63,8 @@ export default function BottomTabNavigator() {
               style={
                   isIOS() &&
                   {
-                      width: 57,
-                      height: 55,
+                      width: 32,
+                      height: 33,
                       backgroundColor: color,
                       marginTop: 5,
                       marginBottom: 10,
@@ -72,8 +72,8 @@ export default function BottomTabNavigator() {
                   }
                   ||
                   {
-                      width: 57,
-                      height: 55,
+                      width: 32,
+                      height: 33,
                       backgroundColor: color,
                       marginTop: 5,
                       resizeMode: 'contain'

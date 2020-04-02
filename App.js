@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  Platform,
-  StatusBar,
-  StyleSheet,
-  View
-} from "react-native";
+import { Platform, StatusBar, StyleSheet, View, Image} from "react-native";
 import { SplashScreen } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
@@ -14,6 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DetailsScreen from "./screens/DetailsScreen";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
+import { Header } from "react-native/Libraries/NewAppScreen";
 
 const Stack = createStackNavigator();
 
@@ -48,7 +44,14 @@ export default function App(props) {
 
     loadResourcesAndDataAsync();
   }, []);
-
+  const stackScrOpt = {
+    headerTitle: () => (
+      <Image
+        style={styles.image}
+        source={require("./assets/images/football.png")}
+      />
+    )
+  };
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return null;
   } else {
@@ -61,11 +64,24 @@ export default function App(props) {
         >
           <Stack.Navigator
             screenOptions={{
-              headerShown: false
+              headerStyle: {
+                backgroundColor: "#313B49",
+              },
+              headerTitleAlign: "center",
+              headerTintColor: "#FFFFFF",
+              headerBackTitle: "Back"
             }}
           >
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-            <Stack.Screen name="Details" component={DetailsScreen} />
+            <Stack.Screen
+              name="Root"
+              component={BottomTabNavigator}
+              options={stackScrOpt}
+            />
+            <Stack.Screen
+              name="Details"
+              component={DetailsScreen}
+              options={stackScrOpt}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
@@ -77,5 +93,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  image: {
+    height: 58,
+    width: 58
   }
 });

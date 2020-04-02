@@ -4,8 +4,9 @@ import {
   Image,
   TouchableOpacity,
   View,
-  FlatList
+  RefreshControl
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import { HelveticaText } from "../components/StyledText";
 
@@ -13,17 +14,31 @@ import API from "../API";
 
 export default function RankScreen({ navigation }) {
   const [rankData, setRankData] = useState({});
+  const [refreshing, setRefreshing] = React.useState(false);
 
-  const fetchRankings = async () => await API.get("/v2/competitions/2021/standings/");
+  const fetchRankings = async () =>
+    await API.get("/v2/competitions/2021/standings/");
 
   useEffect(() => {
     fetchRankings()
-        .then(success => setRankData(success.data))
-        .catch(error => console.log(error))
+      .then(success => setRankData(success.data))
+      .catch(error => console.log(error));
   }, []);
 
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await fetchRankings();
+    setRefreshing(false);
+  };
   return (
     <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }
+      >
         <Image
           source={require("../assets/images/heroImage.png")}
           style={styles.image}
@@ -35,7 +50,11 @@ export default function RankScreen({ navigation }) {
           >
             #
           </HelveticaText>
-          <HelveticaText style={StyleSheet.flatten([styles.header, styles.teamName])}>CLUB</HelveticaText>
+          <HelveticaText
+            style={StyleSheet.flatten([styles.header, styles.teamName])}
+          >
+            CLUB
+          </HelveticaText>
           <HelveticaText
             style={StyleSheet.flatten([styles.item, styles.header])}
           >
@@ -62,10 +81,8 @@ export default function RankScreen({ navigation }) {
             P
           </HelveticaText>
         </View>
-
-        <FlatList
-          data={rankData.standings && rankData.standings[0].table}
-          renderItem={({ item }) => {
+        {rankData.standings &&
+          rankData.standings[0].table.map(item=> {
             const {
               position,
               team,
@@ -79,6 +96,7 @@ export default function RankScreen({ navigation }) {
             return (
               <TouchableOpacity
                 onPress={() => navigation.navigate("Details", { id: team.id })}
+                key={team.id.toString()}
               >
                 <View style={styles.row}>
                   <HelveticaText style={styles.position}>
@@ -97,9 +115,8 @@ export default function RankScreen({ navigation }) {
                 </View>
               </TouchableOpacity>
             );
-          }}
-          keyExtractor={item => item.team.id.toString()}
-        />
+          })}
+      </ScrollView>
     </View>
   );
 }

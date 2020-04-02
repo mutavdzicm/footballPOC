@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, View, Image, RefreshControl } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { SvgUri } from "react-native-svg";
 
 import SwitchSelector from "react-native-switch-selector";
@@ -9,12 +8,13 @@ import { HelveticaText } from "../components/StyledText";
 
 import API from "../API";
 
-export default function DetailsScreen({ route, navigation }) {
+export default function DetailsScreen({ route }) {
   const { id } = route.params;
   const [homeRankData, setHomeRankData] = useState(null);
   const [awayRankData, setAwayRankData] = useState(null);
   const [displayedRankData, setDisplayedRankData] = useState(null);
   const [teamData, setTeamData] = useState({});
+  const [refreshing, setRefreshing] = React.useState(false);
 
   // API calls
   async function fetchRankings() {
@@ -37,6 +37,12 @@ export default function DetailsScreen({ route, navigation }) {
     fetchTeamDetails(id);
     fetchRankings("HOME");
   }, []);
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await fetchTeamDetails(id);
+    await fetchRankings("HOME");
+    setRefreshing(false);
+  };
 
   const currentTeamData =
     displayedRankData === null
@@ -63,13 +69,10 @@ export default function DetailsScreen({ route, navigation }) {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }
       >
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <View style={styles.backBtn}>
-            <Ionicons name="ios-arrow-back" size={23} color="black" />
-            <Text style={styles.backTxt}>Back</Text>
-          </View>
-        </TouchableOpacity>
         <View style={styles.teamContent}>
           <SvgUri
             style={styles.teamLogo}
@@ -83,35 +86,35 @@ export default function DetailsScreen({ route, navigation }) {
                 source={require("../assets/images/address.png")}
                 style={styles.teamico}
               />
-               <HelveticaText>{address}</HelveticaText>
+              <HelveticaText>{address}</HelveticaText>
             </View>
             <View style={styles.teamRow}>
               <Image
                 source={require("../assets/images/stadium.png")}
                 style={styles.teamico}
               />
-               <HelveticaText >{venue}</HelveticaText>
+              <HelveticaText>{venue}</HelveticaText>
             </View>
             <View style={styles.teamRow}>
               <Image
                 source={require("../assets/images/website.png")}
                 style={styles.teamico}
               />
-               <HelveticaText >{website}</HelveticaText>
+              <HelveticaText>{website}</HelveticaText>
             </View>
             <View style={styles.teamRow}>
               <Image
                 source={require("../assets/images/mail.png")}
                 style={styles.teamico}
               />
-               <HelveticaText >{email}</HelveticaText>
+              <HelveticaText>{email}</HelveticaText>
             </View>
             <View style={styles.teamRow}>
               <Image
                 source={require("../assets/images/year.png")}
                 style={styles.teamico}
               />
-               <HelveticaText >{founded}</HelveticaText>
+              <HelveticaText>{founded}</HelveticaText>
             </View>
           </View>
         </View>
@@ -149,35 +152,69 @@ export default function DetailsScreen({ route, navigation }) {
         <View>
           <View style={styles.gamesRow}>
             <HelveticaText style={styles.gamesTxt}>Played games</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{playedGames}</HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {playedGames}
+            </HelveticaText>
           </View>
           <View style={styles.gamesRow}>
             <HelveticaText style={styles.gamesTxt}>Won games</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{won}</HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {won}
+            </HelveticaText>
           </View>
           <View style={styles.gamesRow}>
             <HelveticaText style={styles.gamesTxt}>Draw games</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{draw}</HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {draw}
+            </HelveticaText>
           </View>
           <View style={styles.gamesRow}>
             <HelveticaText style={styles.gamesTxt}>Lost games</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{lost}</HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {lost}
+            </HelveticaText>
           </View>
           <View style={styles.gamesRow}>
             <HelveticaText style={styles.gamesTxt}>Goal for</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{goalsFor}</HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {goalsFor}
+            </HelveticaText>
           </View>
           <View style={styles.gamesRow}>
             <HelveticaText style={styles.gamesTxt}>Goal against</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{goalsAgainst}</HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {goalsAgainst}
+            </HelveticaText>
           </View>
           <View style={styles.gamesRow}>
-            <HelveticaText style={styles.gamesTxt}>Goal difference</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{goalDifference}</HelveticaText>
+            <HelveticaText style={styles.gamesTxt}>
+              Goal difference
+            </HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {goalDifference}
+            </HelveticaText>
           </View>
           <View style={styles.gamesRow}>
             <HelveticaText style={styles.gamesTxt}>Points</HelveticaText>
-            <HelveticaText style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}>{points}</HelveticaText>
+            <HelveticaText
+              style={StyleSheet.flatten([styles.gamesTxt, styles.transp])}
+            >
+              {points}
+            </HelveticaText>
           </View>
         </View>
       </ScrollView>
@@ -195,22 +232,12 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20
   },
-  backBtn: {
-    flexDirection: "row"
-  },
-  backTxt: {
-    fontSize: 20,
-    fontWeight: "bold",
-    paddingLeft: 6,
-    lineHeight: 23
-  },
   teamLogo: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
   },
   teamContent: {
-    marginTop: 50,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center"
