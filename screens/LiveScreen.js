@@ -1,21 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, AppState, Platform } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import LiveMatch from "../components/LiveMatch";
 
 
 const LiveScreen = () => {
+
     const [livescore, setLivescore] = useState({matches: []});
+    const [appState, setAppState] = useState(AppState.currentState);
 
     useEffect(() => {
+        handleWebSocket();
+
+        if( Platform.OS === 'ios' ) {
+            AppState.addEventListener("change", handleAppStateChange);
+
+            return () => {
+                AppState.removeEventListener("change", handleAppStateChange);
+            };
+        }
+    }, []);
+
+    const handleAppStateChange = nextAppState => {
+        if (appState.match(/inactive|background/) && nextAppState === "active") {
+            handleWebSocket();
+        }
+        setAppState(nextAppState);
+    };
+
+    const handleWebSocket = () => {
         const socket = new WebSocket('ws://vasilie.net:42069/girodins-livescore');
 
         socket.onmessage = e => {
             setLivescore(JSON.parse(e.data));
         };
 
-        return () => socket.close();
-    }, []);
+        return socket;
+    };
 
     const renderLiveScores = () => livescore.matches.map(match => <LiveMatch key={ match.title } match={ match } />);
 
