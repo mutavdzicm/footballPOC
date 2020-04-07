@@ -66,6 +66,7 @@ export default function App(props) {
             screenOptions={{
               headerStyle: {
                 backgroundColor: "#313B49",
+                shadowColor: 'transparent',
               },
               headerTitleAlign: "center",
               headerTintColor: "#FFFFFF",

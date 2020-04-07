@@ -52,7 +52,14 @@ const LiveScreen = () => {
           <ScrollView
               style={styles.container}
               contentContainerStyle={styles.contentContainer}
-              refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh}/>}
+              refreshControl={
+                  <RefreshControl
+                      refreshing={refreshing}
+                      onRefresh={handleRefresh}
+                      style={{backgroundColor: '#313B49'}}
+                      color='black'
+                  />
+              }
           >
               <Image
                   style={styles.banner}

@@ -36,7 +36,12 @@ export default function RankScreen({ navigation }) {
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+          <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              style={{backgroundColor: '#313B49'}}
+              color='black'
+          />
         }
       >
         <Image
