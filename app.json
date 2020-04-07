@@ -1,31 +1,30 @@
 {
   "expo": {
-    "name": "Tab Navigation Template",
-    "slug": "footballPOC",
+    "name": "FootballPOC",
+    "slug": "FootballPOC",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
+    "scheme": "girondinspoc",
+    "platforms": ["ios", "android"],
+    "ios": {
+      "bundleIdentifier": "com.webedia.soccer.poc",
+      "buildNumber": "1.0.3",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.webedia.soccer.poc"
+    },
+    "version": "1.0.3",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/football.png",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/loading.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#313B49"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    }
+    "assetBundlePatterns": ["*/"]
   }
 }
