@@ -2878,6 +2878,14 @@ expo-sqlite@~8.0.0:
     "@types/websql" "^0.0.27"
     lodash "^4.17.15"
 
+expo-svg-uri@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/expo-svg-uri/-/expo-svg-uri-1.1.0.tgz#d73c62891bcc45bc3ed60077b61e624362023c77"
+  integrity sha512-12D/G+QGJeo1JXbAruglNAUuI31qroWPKcNo2ke8hxegBTA2Wo6AIv/8hMuyL2M3p6CJXvvBKjrPWYTP3YOMYw==
+  dependencies:
+    react-native-svg "^9.9.4"
+    xmldom "^0.1.27"
+
 expo-web-browser@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-8.0.0.tgz#8a4451c744c115569a4c810dac8851f219a21c72"
@@ -4441,9 +4449,9 @@ lodash.throttle@^4.1.1:
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
 lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -5578,6 +5586,14 @@ react-native-svg@9.13.3:
   version "9.13.3"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-9.13.3.tgz#6414b337d55af169ac2487ab70f3108404434446"
   integrity sha512-H50b2m4jvrQ7KxKs8uYSuWecr6e5XC7BDfS7DaA96+0Owjh0C9DksI5l8SRyHnmE+emiYMPu6Qqfr9dCyKkaJQ==
+  dependencies:
+    css-select "^2.0.2"
+    css-tree "^1.0.0-alpha.37"
+
+react-native-svg@^9.9.4:
+  version "9.13.6"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-9.13.6.tgz#5365fba2bc460054b90851e71f2a71006a5d373f"
+  integrity sha512-vjjuJhEhQCwWjqsgWyGy6/C/LIBM2REDxB40FU1PMhi8T3zQUwUHnA6M15pJKlQG8vaZyA+QnLyIVhjtujRgig==
   dependencies:
     css-select "^2.0.2"
     css-tree "^1.0.0-alpha.37"
@@ -7014,7 +7030,7 @@ xmldoc@^1.1.2:
   dependencies:
     sax "^1.2.1"
 
-xmldom@0.1.x:
+xmldom@0.1.x, xmldom@^0.1.27:
   version "0.1.31"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.31.tgz#b76c9a1bd9f0a9737e5a72dc37231cf38375e2ff"
   integrity sha512-yS2uJflVQs6n+CyjHoaBmVSqIDevTAWrzMmjG1Gc7h1qQ7uVozNhEPJAwZXWyGQ/Gafo3fCwrcaokezLPupVyQ==
